@@ -18,6 +18,14 @@ const createAuthor = async function (req, res) {
       if (data.phone.length < 10 || data.phone.length > 10) {
         return res.status(400).send({ status: false, msg: "phone no must be 10 digit" });
       }
+
+      const duplicatePhone = await authorModel.findOne({ phone: data.phone });
+  
+      if (duplicatePhone) {
+        return res
+          .status(400)
+          .send({ status: false, msg: "Phone already exists" });
+      }
       
      
   
