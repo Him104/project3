@@ -1,0 +1,21 @@
+{
+  "name": "book-publisher",
+  "version": "1.0.0",
+  "description": "book publisher",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "author": "Subhash Maurya",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.4.2",
+    "validator": "^13.11.0",
+    "nodemon": "^3.0.1"
+  }
+}
