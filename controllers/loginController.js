@@ -18,11 +18,11 @@ const login = async function (req, res) {
         email: data.email,
         password: data.password,
       });
-      if (!authorMatch) {
+      if (!authorMatch) { 
         
         return res
           .status(400)
-          .send({ status: false, msg: "Email or Password is incorrect" });
+          .send({ status: false, msg: "Email or Password is incorrect please enter correct is and pass" });
       }
       const token = jwt.sign({ authorId: authorMatch._id }, process.env.SECRET_KEY, {
         expiresIn: "70h",
