@@ -63,7 +63,7 @@ const updateReview = async function(req,res){
 
      const updateReview = await reviewModel.findOneAndUpdate({_id:reviewId},
     {$set:{reviewedBy:data.reviewedBy, rating:data.rating, review:data.review}},
-    {new:true})
+    {new:true});
   
     return res.status(200).send({status:true,message:"BookReview details updated successfully", data:updateReview})
   

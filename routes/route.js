@@ -9,6 +9,7 @@ const updateBooksController = require('../controllers/updateBookController.js');
 const deleteBooksController = require('../controllers/deleteBookController.js');
 const reviewBooksController = require('../controllers/reviewBookController.js');
 const updateReviewController = require('../controllers/updateReviewController.js');
+const deleteReviewController = require('../controllers/deleteReviewController.js');
 
 const middlewares = require('../middleware/auth.js'); 
 
@@ -18,14 +19,16 @@ router.post('/register', authorController.createAuthor);
 router.post('/login', loginController.login);
 router.post('/books', middlewares.authentication, bookCreateController.createBook);
 router.post('/books/:bookId/review', reviewBooksController.createBookReview);
-//router.post('/books/review', reviewBooksController.createBookReview);
 
 
 router.get('/books', middlewares.authentication, getBooksController.getBooks);
 router.get('/books/:bookId', middlewares.authentication, getBooksController.getBooksById);
+
 router.put('/books/:bookId', middlewares.authentication, updateBooksController.updateBook);
-router.put('/books/:bookId/review/:reviewId', updateReviewController.updateReview); 
+router.put('/books/:bookId/review/:reviewId', middlewares.authentication, updateReviewController.updateReview); 
+
 router.delete('/books/:bookId', middlewares.authentication, deleteBooksController.deleteBook);
+router.delete('/books/:bookId/review/:reviewId', deleteReviewController.deleteReview);
 
 
 
