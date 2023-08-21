@@ -39,6 +39,20 @@ const updateBook = async function(req,res){
           .status(400)
           .send({ status: false, msg: "ISBN already exists Please Choose Other" });
       }
+      
+      if (!data.excerpt) {
+        return res.status(400).send({status:false, message: "Please enter excerpt"});
+        
+      }
+      if (!data.authorId) {
+        return res.status(400).send({status:false, message: "Please enter authorId"});
+        
+      }
+      if (!data.category) {
+        return res.status(400).send({status:false, message: "Please enter category"});
+        
+      }
+
      const updateBook = await booksModel.findOneAndUpdate({_id:bookId},
     {$set:{title:data.title, excerpt:data.excerpt, ISBN:data.ISBN, releasedAt:data.releasedAt}},
     {new:true})
