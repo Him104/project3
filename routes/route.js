@@ -24,8 +24,8 @@ router.post('/books/:bookId/review', reviewBooksController.createBookReview);
 router.get('/books', middlewares.authentication, getBooksController.getBooks);
 router.get('/books/:bookId', middlewares.authentication, getBooksController.getBooksById);
 
-router.put('/books/:bookId', middlewares.authentication, updateBooksController.updateBook);
-router.put('/books/:bookId/review/:reviewId', middlewares.authentication, updateReviewController.updateReview); 
+router.put('/books/:bookId', updateBooksController.updateBook);
+router.put('/books/:bookId/review/:reviewId',  updateReviewController.updateReview); 
 
 router.delete('/books/:bookId', middlewares.authentication, deleteBooksController.deleteBook);
 router.delete('/books/:bookId/review/:reviewId', deleteReviewController.deleteReview);

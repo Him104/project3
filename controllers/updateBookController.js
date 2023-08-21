@@ -1,4 +1,5 @@
 const booksModel = require("../models/bookModel");
+const mongoose = require("mongoose");
 
 const updateBook = async function(req,res){
     try {
@@ -6,6 +7,13 @@ const updateBook = async function(req,res){
       let data = req.body;
   
       let bookId = req.params.bookId;
+
+     let checkBookId =  mongoose.isValidObjectId(bookId); 
+
+     if(checkBookId == false){
+
+      return res.status(400).send({status:false, message: "Please enter a valid bookId"});
+     }
   
       if (!bookId) {
         return res.status(400).send({status:false, message: "Please enter bookId"});
