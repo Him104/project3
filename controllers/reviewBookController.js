@@ -20,6 +20,7 @@ const createBookReview = async function (req, res) {
               .status(400)
               .send({ status: false, msg: "Book reviewer is required field" });
           }
+          
           if (!data.rating) {
             return res.status(400).send({ status: false, msg: "Book review rating is required" });
           }

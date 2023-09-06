@@ -30,7 +30,7 @@ if (Object.keys(query).length!=0) {
           }
 
           if (getByQuery.length ==0){
-            return  res.status(404).send({ status: false, msg: "No blogs found by filter"});
+            return  res.status(404).send({ status: false, msg: "No books found by filter"});
           }
   
   
@@ -67,11 +67,7 @@ const getBooksById = async function(req,res){
         return res.status(400).send({status:false, message:"book has already been deleted"});
         
       }
-      if (book.reviews==0) {
-      
-        return res.status(400).send({status:false, message:"book has no review"});
-        
-      }
+     
       
       return res.status(200).send({status:true, message: "Book details found", data:book});
   
