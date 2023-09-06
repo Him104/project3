@@ -31,7 +31,7 @@ const login = async function (req, res) {
         .status(200)
         .send({ status: true, msg: "Logged in successfully", token });
     } catch (error) {
-      res.status(500).send({ status: false, error: error.msg });
+      res.status(500).send({ status: false, message: error.msg });
     }
   };
   

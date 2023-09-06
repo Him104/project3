@@ -17,32 +17,27 @@ const updateReview = async function(req,res){
         return res.status(400).send({status:false, message: "Please enter reviewId"});
         
       }
+
+      if (!(data.rating>=1 && data.rating<=5)) {
+        return res.status(400).send({status:false, message: "Please enter Rating value b/w 1 to 5"});
+        
+      }
   
-      const book = await booksModel.findById(bookId);
+      const book = await booksModel.findOne({_id:bookId, isDeleted:false});
   
       if (!book) {
   
         return res.status(400).send({status:false, message: "Please enter valid bookId"})
         
       }
-      if (book.isDeleted==true) {
-      
-        return res.status(400).send({status:false, message:"book has already been deleted"});
-        
-      }
+     
 
-      const findReview = await reviewModel.findById(reviewId);
+      const findReview = await reviewModel.findOne({_id:reviewId, isDeleted:false}); 
       if (!findReview) {
   
         return res.status(400).send({status:false, message: "Please enter valid reviewId"})
         
       }
-      if (findReview.isDeleted==true) {
-      
-        return res.status(400).send({status:false, message:"Review has already been deleted"});
-        
-      }
-
       
       if (!data.reviewedBy) {
         return res.status(400).send({status:false, message: "Please enter reviewedBy"});
@@ -56,16 +51,21 @@ const updateReview = async function(req,res){
         return res.status(400).send({status:false, message: "Please enter rating Range b/w 1 to 5"});
         
       }
-      if (!data.review) {
-        return res.status(400).send({status:false, message: "Please enter review Content"});
-        
-      }
-
-     const updateReview = await reviewModel.findOneAndUpdate({_id:reviewId},
-    {$set:{reviewedBy:data.reviewedBy, rating:data.rating, review:data.review}},
+     
+      var reviewedAt = Date.now();
+     const updateReview = await reviewModel.findOneAndUpdate({_id:reviewId, bookId: bookId},
+    {$set:{reviewedBy:data.reviewedBy, rating:data.rating, review:data.review, reviewedAt: reviewedAt}},
     {new:true});
+
+    let bookDetails = { title: book.title,
+    excerpt: book.excerpt,
+    authorId: book.authorId,
+    ISBN: book.ISBN,
+    category:book.category,
+    subcategory: book.subcategory
+ }
   
-    return res.status(200).send({status:true,message:"BookReview details updated successfully", data:updateReview})
+    return res.status(200).send({status:true,message:"BookReview details updated successfully", data:updateReview, bookDetails:bookDetails})
   
   
   
